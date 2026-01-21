@@ -1,0 +1,65 @@
+{
+  "rewrites": [
+    {
+      "source": "/:name*.wasm",
+      "has": [
+        { "type": "header", "key": "Accept-Encoding", "value": "br" }
+      ],
+      "destination": "/:name.wasm.br"
+    },
+    {
+      "source": "/:name*.data",
+      "has": [
+        { "type": "header", "key": "Accept-Encoding", "value": "br" }
+      ],
+      "destination": "/:name.data.br"
+    },
+    {
+      "source": "/:name*.framework.js",
+      "has": [
+        { "type": "header", "key": "Accept-Encoding", "value": "br" }
+      ],
+      "destination": "/:name.framework.js.br"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.+).wasm.br",
+      "headers": [
+        { "key": "Content-Type", "value": "application/wasm" },
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/(.+).data.br",
+      "headers": [
+        { "key": "Content-Type", "value": "application/octet-stream" },
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/(.+).framework.js.br",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ]
+}
