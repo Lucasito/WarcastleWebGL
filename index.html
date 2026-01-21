@@ -10,35 +10,28 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background: black;
             overflow: hidden;
+            background: black;
         }
 
-        /* Контейнер для Unity */
-        #unity-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Canvas занимает область в 3:4, центрируется */
         #unity-canvas {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
             background: black;
+            /* центрируем */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        /* Простой индикатор загрузки */
+        /* простой прогресс бар */
         #loader {
-            width: 60%;
-            height: 10px;
-            background: #444;
             position: absolute;
-            left: 50%;
             top: 5%;
-            transform: translateX(-50%);
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 60%;
+            height: 8px;
+            background: #444;
         }
         #loader-progress {
             width: 0%;
@@ -49,42 +42,40 @@
 </head>
 <body>
 
-<div id="unity-container">
-    <canvas id="unity-canvas"></canvas>
-    <div id="loader"><div id="loader-progress"></div></div>
-</div>
+<canvas id="unity-canvas"></canvas>
+<div id="loader"><div id="loader-progress"></div></div>
 
 <script>
-    // Функция масштабирования canvas в 3:4
-    function resizeCanvas3by4() {
-        let canvas = document.getElementById("unity-canvas");
-        let w = window.innerWidth;
-        let h = window.innerHeight;
-        let targetRatio = 3/4;
-        let screenRatio = w / h;
-        let newWidth, newHeight;
+function resizeCanvas3by4() {
+    let canvas = document.getElementById("unity-canvas");
+    let w = window.innerWidth;
+    let h = window.innerHeight;
 
-        if (screenRatio > targetRatio) {
-            newHeight = h;
-            newWidth = h * targetRatio;
-        } else {
-            newWidth = w;
-            newHeight = w / targetRatio;
-        }
+    // 3:4
+    let targetRatio = 3/4;
+    let screenRatio = w / h;
+    let newWidth, newHeight;
 
-        canvas.style.width = newWidth + "px";
-        canvas.style.height = newHeight + "px";
-        canvas.width = newWidth;
-        canvas.height = newHeight;
-
-        canvas.style.left = ((w - newWidth) / 2) + "px";
-        canvas.style.top = ((h - newHeight) / 2) + "px";
+    if (screenRatio > targetRatio) {
+        newHeight = h;
+        newWidth = h * targetRatio;
+    } else {
+        newWidth = w;
+        newHeight = w / targetRatio;
     }
 
-    window.addEventListener("resize", resizeCanvas3by4);
+    // CSS размер
+    canvas.style.width  = newWidth + "px";
+    canvas.style.height = newHeight + "px";
 
-    // Загрузка Unity WebGL
-    var loaderProgress = document.getElementById("loader-progress");
+    // Буфер рендера
+    canvas.width  = newWidth;
+    canvas.height = newHeight;
+}
+
+window.addEventListener("resize", resizeCanvas3by4);
+
+var loaderProgress = document.getElementById("loader-progress");
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
@@ -99,18 +90,18 @@
         productVersion: "0.2.21",
       };
 
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-        createUnityInstance(document.getElementById("unity-canvas"), config, (progress) => {
-            loaderProgress.style.width = (progress * 100) + "%";
-        }).then((unityInstance) => {
-            document.getElementById("loader").style.display = "none";
-            resizeCanvas3by4();
-        });
-    };
+var script = document.createElement("script");
+script.src = loaderUrl;
+script.onload = () => {
+    createUnityInstance(document.getElementById("unity-canvas"), config, (progress) => {
+        loaderProgress.style.width = (progress * 100) + "%";
+    }).then((unityInstance) => {
+        document.getElementById("loader").style.display = "none";
+        resizeCanvas3by4();
+    });
+};
 
-    document.body.appendChild(script);
+document.body.appendChild(script);
 </script>
 
 </body>
