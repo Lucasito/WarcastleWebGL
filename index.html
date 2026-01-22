@@ -60,8 +60,11 @@ function resizeCanvas3by4() {
         newHeight = h;
         newWidth = h * targetRatio;
     } else {
-        newWidth = w;
-        newHeight = w / targetRatio;
+        //newWidth = w;
+        //newHeight = w / targetRatio;
+        newHeight = h;
+        newWidth = h * targetRatio;
+
     }
 
     // CSS размер
