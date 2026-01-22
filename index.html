@@ -53,18 +53,24 @@ function resizeCanvas3by4() {
 
     // 3:4
     let targetRatio = 3/4;
-    let screenRatio = w / h;
+//    let screenRatio = w / h;
     let newWidth, newHeight;
+//
+//    if (screenRatio > targetRatio) {
+//        newHeight = h;
+//        newWidth = h * targetRatio;
+//    } else {
+//        newWidth = w;
+//        newHeight = w / targetRatio;
+//    }
+    // вычисл€ем максимально возможный
+    let newWidth = w;
+    let newHeight = w / targetRatio;
 
-    if (screenRatio > targetRatio) {
+    if (newHeight > h) {
+        // если по высоте выходит за экран, подбираем по высоте
         newHeight = h;
         newWidth = h * targetRatio;
-    } else {
-        //newWidth = w;
-        //newHeight = w / targetRatio;
-        newHeight = h;
-        newWidth = h * targetRatio;
-
     }
 
     // CSS размер
