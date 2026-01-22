@@ -17,13 +17,13 @@
         #unity-canvas {
             position: absolute;
             background: black;
-            /* центрируем */
+            /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
-        /* простой прогресс бар */
+        /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ */
         #loader {
             position: absolute;
             top: 5%;
@@ -63,24 +63,32 @@ function resizeCanvas3by4() {
 //        newWidth = w;
 //        newHeight = w / targetRatio;
 //    }
-    // вычисляем максимально возможный
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     let newWidth = w;
     let newHeight = w / targetRatio;
 
     if (newHeight > h) {
-        // если по высоте выходит за экран, подбираем по высоте
+        // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         newHeight = h;
         newWidth = h * targetRatio;
     }
 
-    // CSS размер
+    // CSS пїЅпїЅпїЅпїЅпїЅпїЅ
     canvas.style.width  = newWidth + "px";
     canvas.style.height = newHeight + "px";
 
-    // Буфер рендера
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     canvas.width  = newWidth;
     canvas.height = newHeight;
 }
+
+//var originalFetch = fetch;
+//fetch = function(url, options) {
+//  options = options || {};
+//  options.credentials = 'include';
+//  return originalFetch(url, options);
+//};
+
 
 window.addEventListener("resize", resizeCanvas3by4);
 
