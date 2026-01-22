@@ -17,13 +17,13 @@
         #unity-canvas {
             position: absolute;
             background: black;
-            /* центрируем */
+            /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
-        /* простой прогресс бар */
+        /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ */
         #loader {
             position: absolute;
             top: 5%;
@@ -74,27 +74,22 @@ function resizeCanvas3by4() {
     canvas.height = newHeight;
 }
 
+
 window.addEventListener("resize", resizeCanvas3by4);
 
 var loaderProgress = document.getElementById("loader-progress");
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-        #if MEMORY_FILENAME
-        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-        #endif
-        #if SYMBOLS_FILENAME
-        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-        #endif
+        dataUrl: buildUrl + "/WebGL.data.br",
+        frameworkUrl: buildUrl + "/WebGL.framework.js.br",
+        codeUrl: buildUrl + "/WebGL.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "{{{ COMPANY_NAME }}}",
-        productName: "{{{ PRODUCT_NAME }}}",
-        productVersion: "{{{ PRODUCT_VERSION }}}",
+        companyName: "littlestories",
+        productName: "Warcastle",
+        productVersion: "0.2.21",
       };
 
 var script = document.createElement("script");
