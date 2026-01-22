@@ -17,13 +17,13 @@
         #unity-canvas {
             position: absolute;
             background: black;
-            /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+            /* центрируем */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
-        /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ */
+        /* простой прогресс бар */
         #loader {
             position: absolute;
             top: 5%;
@@ -53,58 +53,48 @@ function resizeCanvas3by4() {
 
     // 3:4
     let targetRatio = 3/4;
-//    let screenRatio = w / h;
-//    let newWidth, newHeight;
-//
-//    if (screenRatio > targetRatio) {
-//        newHeight = h;
-//        newWidth = h * targetRatio;
-//    } else {
-//        newWidth = w;
-//        newHeight = w / targetRatio;
-//    }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    let newWidth = w;
-    let newHeight = w / targetRatio;
+    // Всегда максимальная высота
+    let newHeight = h;
 
-    if (newHeight > h) {
-        // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-        newHeight = h;
-        newWidth = h * targetRatio;
+    // Ширина максимум по соотношению 3:4
+    let newWidth = newHeight * targetRatio;
+
+    // Если такая ширина больше чем экранная ширина — ограничиваем
+    if (newWidth > w) {
+        newWidth = w;
+//        newHeight = newWidth / targetRatio;
     }
 
-    // CSS пїЅпїЅпїЅпїЅпїЅпїЅ
+    // CSS размеры
     canvas.style.width  = newWidth + "px";
     canvas.style.height = newHeight + "px";
 
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // Буфер рендера (реальное разрешение)
     canvas.width  = newWidth;
     canvas.height = newHeight;
 }
-
-//var originalFetch = fetch;
-//fetch = function(url, options) {
-//  options = options || {};
-//  options.credentials = 'include';
-//  return originalFetch(url, options);
-//};
-
 
 window.addEventListener("resize", resizeCanvas3by4);
 
 var loaderProgress = document.getElementById("loader-progress");
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL.loader.js";
+      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/WebGL.data.br",
-        frameworkUrl: buildUrl + "/WebGL.framework.js.br",
-        codeUrl: buildUrl + "/WebGL.wasm.br",
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+        #if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+        #endif
+        #if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+        #endif
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "littlestories",
-        productName: "Warcastle",
-        productVersion: "0.2.21",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
       };
 
 var script = document.createElement("script");
