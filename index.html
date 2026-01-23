@@ -51,6 +51,13 @@ function resizeCanvas3by4() {
     let w = window.innerWidth;
     let h = window.innerHeight;
 
+    // ≈сли высота уменьшилась значительно (клавиатура), игнорируем
+    let diff = Math.abs(baseHeight - h);
+    if (diff < baseHeight * 0.20) { // порог ~20%
+        // не пересчитываем canvas здесь
+        return;
+    }
+
     // 3:4
     let targetRatio = 3/4;
     // ¬сегда максимальна€ высота
@@ -74,6 +81,12 @@ function resizeCanvas3by4() {
     canvas.height = newHeight;
 }
 
+let baseHeight = window.innerHeight;
+
+// ¬ызываем один раз при загрузке
+window.addEventListener("load", () => {
+    baseHeight = window.innerHeight;
+});
 
 window.addEventListener("resize", resizeCanvas3by4);
 
