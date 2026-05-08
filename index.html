@@ -53,23 +53,23 @@ function resizeCanvas3by4() {
 
     // 3:4
     let targetRatio = 3/4;
-    // Всегда максимальная высота
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     let newHeight = h;
 
-    // Ширина максимум по соотношению 3:4
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3:4
     let newWidth = newHeight * targetRatio;
 
-    // Если такая ширина больше чем экранная ширина — ограничиваем
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if (newWidth > w) {
         newWidth = w;
 //        newHeight = newWidth / targetRatio;
     }
 
-    // CSS размеры
+    // CSS пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     canvas.style.width  = newWidth + "px";
     canvas.style.height = newHeight + "px";
 
-    // Буфер рендера (реальное разрешение)
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     canvas.width  = newWidth;
     canvas.height = newHeight;
 }
@@ -88,7 +88,7 @@ var loaderProgress = document.getElementById("loader-progress");
         streamingAssetsUrl: "StreamingAssets",
         companyName: "littlestories",
         productName: "Warcastle",
-        productVersion: "0.2.21",
+        productVersion: "0.2.22",
       };
 
 var script = document.createElement("script");
